@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KumaGame", "KumaGame\KumaGame.vcxproj", "{5B386099-8D44-4876-9224-3E09A0CC97A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38} = {96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273} = {B73180BD-9BED-4C5E-BF9C-AEE0248E8273}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KumaCompiler", "KumaCompiler\KumaCompiler.vcxproj", "{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273} = {B73180BD-9BED-4C5E-BF9C-AEE0248E8273}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KumaCore", "KumaCore\KumaCore.vcxproj", "{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Debug|x64.ActiveCfg = Debug|x64
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Debug|x64.Build.0 = Debug|x64
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Debug|x86.ActiveCfg = Debug|Win32
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Debug|x86.Build.0 = Debug|Win32
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Release|x64.ActiveCfg = Release|x64
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Release|x64.Build.0 = Release|x64
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Release|x86.ActiveCfg = Release|Win32
+		{5B386099-8D44-4876-9224-3E09A0CC97A6}.Release|x86.Build.0 = Release|Win32
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Debug|x64.ActiveCfg = Debug|x64
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Debug|x64.Build.0 = Debug|x64
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Debug|x86.ActiveCfg = Debug|Win32
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Debug|x86.Build.0 = Debug|Win32
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Release|x64.ActiveCfg = Release|x64
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Release|x64.Build.0 = Release|x64
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Release|x86.ActiveCfg = Release|Win32
+		{96B1949A-BCBC-44EF-86C1-7BBB1E9A9A38}.Release|x86.Build.0 = Release|Win32
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Debug|x64.ActiveCfg = Debug|x64
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Debug|x64.Build.0 = Debug|x64
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Debug|x86.ActiveCfg = Debug|Win32
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Debug|x86.Build.0 = Debug|Win32
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Release|x64.ActiveCfg = Release|x64
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Release|x64.Build.0 = Release|x64
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Release|x86.ActiveCfg = Release|Win32
+		{B73180BD-9BED-4C5E-BF9C-AEE0248E8273}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69798D31-6892-4D1B-8488-369A0C22E2C1}
+	EndGlobalSection
+EndGlobal
