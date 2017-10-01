@@ -2,19 +2,16 @@
 #include <string>
 #include <vector>
 #include <cctype>
+#include <string_view>
 
 #include "Token.h"
+#include "LexerState.h"
 
 namespace Dangancompiler
 {
 	class Lexer
 	{
-		enum class LexerState
-		{
-			NONE,
-			READING_ALPHABETIC,
-			READING_NUMERIC,
-		};
+		static constexpr std::string_view separators{ "(){};", 5 };
 
 		std::string source{ "" };
 		size_t currentChar{ 0 };
@@ -33,6 +30,11 @@ namespace Dangancompiler
 			return isdigit(source[currentChar]) != 0;
 		}
 
+		inline bool isCurrentCharSeparator() const
+		{
+			return separators.find(source[currentChar]) != std::string::npos;
+		}
+
 		inline bool isCurrentTokenDataKeyword() const 
 		{
 			return (currentTokenData == "character");
@@ -46,17 +48,18 @@ namespace Dangancompiler
 					tokens.push_back(Token(TokenType::KEYWORD, currentTokenData, TokenDataType::STRING, currentLineNumber));
 				else
 					tokens.push_back(Token(TokenType::IDENTIFIER, currentTokenData, TokenDataType::STRING, currentLineNumber));
-
-				currentTokenData = "";
-				lexerState = LexerState::NONE;
 			}
 			else if (lexerState == LexerState::READING_NUMERIC)
 			{
 				tokens.push_back(Token(TokenType::LITERAL, currentTokenData, TokenDataType::INT, currentLineNumber));
-
-				currentTokenData = "";
-				lexerState = LexerState::NONE;
 			}
+			else if (lexerState == LexerState::READING_SEPARATOR)
+			{
+				tokens.push_back(Token(TokenType::SEPARATOR, currentTokenData, TokenDataType::STRING, currentLineNumber));
+			}
+
+			currentTokenData = "";
+			lexerState = LexerState::NONE;
 		}
 
 	public:
@@ -87,6 +90,13 @@ namespace Dangancompiler
 
 					lexerState = LexerState::READING_NUMERIC;
 					currentTokenData += source[currentChar];
+				}
+				else if (isCurrentCharSeparator())
+				{
+					insertToken();
+					currentTokenData = source[currentChar];
+					lexerState = LexerState::READING_SEPARATOR;
+					insertToken();
 				}
 			}
 			insertToken();

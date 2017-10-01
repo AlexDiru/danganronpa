@@ -5,7 +5,7 @@
 int main()
 {
 	Dangancompiler::Lexer lexer{};
-	lexer.tokenise("character332hello111");
+	lexer.tokenise("character(hello) { 3324; }");
 
 	for (auto const &token : lexer.getTokens())
 		std::cout << token.toString() << std::endl;
