@@ -7,7 +7,7 @@ Token::Token(TokenType tokenType, const std::string& data, TokenDataType tokenDa
 
 std::string Token::toString() const
 {
-	std::string out = "";
+	std::string out = "[" + std::to_string(line) + "] ";
 	if (tokenType == TokenType::COMMENT)
 		out += "Comment";
 	else if (tokenType == TokenType::IDENTIFIER)
@@ -23,7 +23,10 @@ std::string Token::toString() const
 	else
 		out += "<UNKNOWN_TOKEN_TYPE>";
 
-	out += ": " + data;
+	if (data != " ")
+		out += ": " + data;
+	else
+		out += ": [space]";
 
 	if (tokenType == TokenType::LITERAL)
 	{
