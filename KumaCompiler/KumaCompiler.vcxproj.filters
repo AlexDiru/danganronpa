@@ -12,6 +12,9 @@
     <Filter Include="Lexical Analysis">
       <UniqueIdentifier>{629d4ba7-8384-488d-8454-81c9607f7485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Parser">
+      <UniqueIdentifier>{8e48bc4e-f925-4e58-b109-2a4487a31533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -19,6 +22,9 @@
     </ClCompile>
     <ClCompile Include="Token.cpp">
       <Filter>Lexical Analysis</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +45,9 @@
     </ClInclude>
     <ClInclude Include="LexerFlags.h">
       <Filter>Lexical Analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Parser</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -47,7 +47,7 @@ namespace KumaCompiler
 
 		inline bool isCurrentTokenDataKeyword() const 
 		{
-			return (currentTokenData == "character" || currentTokenData == "dialog");
+			return (currentTokenData == "character" || currentTokenData == "scene");
 		}
 
 		void insertToken()
