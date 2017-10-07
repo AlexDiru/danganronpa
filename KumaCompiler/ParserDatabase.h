@@ -1,0 +1,32 @@
+#pragma once
+
+#include <vector>
+#include <memory>
+
+#include "Character.h"
+
+namespace KumaCompiler
+{
+	//Stores all the parsed items
+	class ParserDatabase
+	{
+	public:
+		void addCharacter(std::unique_ptr<KumaCore::Character>& character)
+		{
+			characters.push_back(std::move(character));
+		}
+
+		KumaCore::Character* lookupCharacter(const std::string& identifierName)
+		{
+			for (auto const& character : characters)
+				if (character->getIdentifierName() == identifierName)
+					return character.get();
+
+			return nullptr;
+		}
+
+
+	private:
+		std::vector<std::unique_ptr<KumaCore::Character>> characters;
+	};
+}

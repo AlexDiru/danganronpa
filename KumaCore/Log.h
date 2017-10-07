@@ -11,7 +11,7 @@ namespace KumaCore
 		template <typename T>
 		void log(std::ostringstream& o, T t)
 		{
-			o << t << std::endl;
+			o << t; 
 		}
 
 		template<typename T, typename... Args>
@@ -27,9 +27,9 @@ namespace KumaCore
 			std::ostringstream oss;
 			log(oss, args...);
 			if (level == 0)
-				std::cout << oss.str();
+				std::cout << oss.str() << std::endl;
 			if (level == 1)
-				std::cerr << oss.str();
+				std::cerr << oss.str() << std::endl;
 		}
 
 	public:

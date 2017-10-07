@@ -8,20 +8,7 @@ Token::Token(TokenType tokenType, const std::string& data, TokenDataType tokenDa
 std::string Token::toString() const
 {
 	std::string out = "[" + std::to_string(line) + "] ";
-	if (tokenType == TokenType::COMMENT)
-		out += "Comment";
-	else if (tokenType == TokenType::IDENTIFIER)
-		out += "Identifier";
-	else if (tokenType == TokenType::KEYWORD)
-		out += "Keyword";
-	else if (tokenType == TokenType::LITERAL)
-		out += "Literal";
-	else if (tokenType == TokenType::OPERATOR)
-		out += "Operator";
-	else if (tokenType == TokenType::SEPARATOR)
-		out += "Separator";
-	else
-		out += "<UNKNOWN_TOKEN_TYPE>";
+	out += tokenTypeToString();
 
 	if (data != " ")
 		out += ": " + data;
@@ -43,4 +30,21 @@ std::string Token::toString() const
 	}
 
 	return out;
+}
+
+std::string KumaCompiler::Token::tokenTypeToString() const
+{
+	if (tokenType == TokenType::COMMENT)
+		return "Comment";
+	else if (tokenType == TokenType::IDENTIFIER)
+		return "Identifier";
+	else if (tokenType == TokenType::KEYWORD)
+		return "Keyword";
+	else if (tokenType == TokenType::LITERAL)
+		return "Literal";
+	else if (tokenType == TokenType::OPERATOR)
+		return "Operator";
+	else if (tokenType == TokenType::SEPARATOR)
+		return "Separator";
+	return "<UNKNOWN_TOKEN_TYPE>";
 }

@@ -49,5 +49,8 @@
     <ClInclude Include="Parser.h">
       <Filter>Parser</Filter>
     </ClInclude>
+    <ClInclude Include="ParserDatabase.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

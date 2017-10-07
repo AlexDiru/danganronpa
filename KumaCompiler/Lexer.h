@@ -14,7 +14,7 @@ namespace KumaCompiler
 {
 	class Lexer
 	{
-		static constexpr std::string_view separators{ "(){}; ", 6 };
+		static constexpr std::string_view separators{ "(){}; .", 7 };
 		static constexpr std::string_view operators{ "=+-/*", 5 };
 
 		std::string source{ "" };

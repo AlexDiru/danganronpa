@@ -141,6 +141,7 @@
     <ClInclude Include="LexerFlags.h" />
     <ClInclude Include="LexerState.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="ParserDatabase.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenDataType.h" />
     <ClInclude Include="TokenType.h" />

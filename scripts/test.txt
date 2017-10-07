@@ -1,0 +1,13 @@
+character(KokichiOma)
+{
+	name = "Kokichi Oma";
+}
+character(Gonta)
+{
+	name = Gonta;
+}
+scene(Outside)
+{
+	KokichiOma.say("Well, don't worry. I'm sure you've gotten a little smarter by now, Gonta.");
+	Gonta.say("Y - yeah...Gonta do his best to help...");
+}

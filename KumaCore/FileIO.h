@@ -6,11 +6,17 @@ namespace KumaCore
 {
 	class FileIO
 	{
-		static constexpr std::string_view contentDirectory{ "content", 7 };
-
-		std::string getContent(const std::string& filename)
+	public:
+		static std::string getContent(const std::string& filename)
 		{
-			return "../Content/" + filename;
+			return "../content/" + filename;
 		}
+
+		static std::string getScripts(const std::string& filename)
+		{
+			return "../scripts/" + filename;
+		}
+
+		static std::string loadFile(const std::string& filename);
 	};
 }

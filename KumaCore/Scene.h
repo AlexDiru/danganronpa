@@ -37,6 +37,11 @@ namespace KumaCore
 
 		void show();
 
+		bool hasActionsLeft() const
+		{
+			return currentAction < sceneActions.size();
+		}
+
 	private:
 		std::string name;
 		std::vector<SceneAction> sceneActions;

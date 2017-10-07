@@ -1,12 +1,14 @@
 #include "Lexer.h"
 #include "Scene.h"
 #include "Parser.h"
+#include "ParserDatabase.h"
+#include "FileIO.h"
 
 #include <iostream>
 
 int main()
 {
-	std::string source = 
+	std::string source = KumaCore::FileIO::loadFile(KumaCore::FileIO::getScripts("test.txt"));
 		/*"character(KokichiOma)\n"
 		"{\n"
 		"	name = \"Kokichi Oma\";\n"
@@ -15,12 +17,20 @@ int main()
 		"	sprite(happy) = \"Kokichi_happy.png\";\n"
 		"	sprite(angry) = \"Kokichi_angry.png\";\n"
 		"}\n"
-		"\n"*/
+		"\n"
+		"character(KokichiOma)\n"
+		"{\n"
+		"	name = \"Kokichi Oma\";\n"
+		"}\n"
+		"character(Gonta)\n"
+		"{\n"
+		"   name = \"Gonta\";\n"
+		"}\n"
 		"scene(Outside)\n"
 		"{\n"
 		"	KokichiOma.say(\"Well, don't worry. I'm sure you've gotten a little smarter by now, Gonta.\");\n"
-		"	Gonta.say(\"Y - yeah...Gonta do his best to help...\", happy);\n"
-		"}\n";
+		"	Gonta.say(\"Y - yeah...Gonta do his best to help...\");\n"
+		"}\n";*/
 
 	KumaCompiler::Lexer lexer{};
 	KumaCompiler::LexerFlags flags{};
@@ -39,20 +49,21 @@ int main()
 
 	std::cin.get();
 
-	KumaCompiler::Parser parser;
-	auto parsedScene = parser.parseScene(lexer.getTokens());
+
+	KumaCompiler::ParserDatabase parserDatabase;
+	KumaCompiler::Parser parser(lexer.getTokens());
+
+	parser.parseCharacter();
+	parser.parseCharacter();
+
+	auto parsedScene = parser.parseScene();
 
 	if (parsedScene != nullptr)
-		parsedScene->show();
-
-	KumaCore::Scene scene("ONI");
-	scene.addAction(KumaCore::DialogSceneAction("Alex", "public static void main"));
-	scene.addAction(KumaCore::DialogSceneAction("Jon", "Are we writing Java now?"));
-
-	scene.show();
-	std::cin.get();
-	scene.show();
-	std::cin.get();
+		while (parsedScene->hasActionsLeft())
+		{
+			parsedScene->show();
+			std::cin.get();
+		}
 
 	return 0;
 }
