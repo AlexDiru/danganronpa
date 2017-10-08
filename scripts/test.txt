@@ -1,13 +1,22 @@
 character(KokichiOma)
 {
 	name = "Kokichi Oma";
+	baseFolder = "KokichiOma";
+	defaultSprite = happy;
+	sprite(happy) = "Kokichi_happy.png";
+	sprite(angry) = "Kokichi_angry.png";
 }
 character(Gonta)
 {
-	name = Gonta;
+	name = "Gonta";
+	baseFolder = "Gonta";
+	defaultSprite = happy;
+	sprite(happy) = "Gonta_happy.png";
+	sprite(angry) = "Gonta_angry.png";
 }
 scene(Outside)
 {
-	KokichiOma.say("Well, don't worry. I'm sure you've gotten a little smarter by now, Gonta.");
-	Gonta.say("Y - yeah...Gonta do his best to help...");
+	KokichiOma.say("Well, don't worry. I'm sure you've gotten a little smarter by now, Gonta.", happy);
+	Gonta.say("Y - yeah...Gonta do his best to help...", angry);
+	Gonta.say("Hello world");
 }

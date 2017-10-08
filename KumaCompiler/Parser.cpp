@@ -36,15 +36,51 @@ bool Parser::parseCharacter()
 		{
 			std::string propertyName = tokens[currentTokenIndex].getData();
 
-			currentTokenIndex++;
-			if (!currentToken().isOperator("="))
-				errorExpected("=");
 
 			currentTokenIndex++;
-			if (currentToken().isStringLiteral())
+			if (currentToken().isOperator("="))
 			{
-				if (!character->addProperty(propertyName, currentToken().getData()))
-					KumaCore::Log::getLog().error("Failed to add property to character. PropertyName: ", propertyName, " Value: ", currentToken().getData());
+				// Parse: <ID> = <ID|StrLit>
+				currentTokenIndex++;
+				if (currentToken().isStringLiteral())
+				{
+					if (!character->addProperty(propertyName, currentToken().getData()))
+						KumaCore::Log::getLog().error("Failed to add property to character. PropertyName: ", propertyName, " Value: ", currentToken().getData());
+				}
+				else if (currentToken().isIdentifier())
+				{
+					if (!character->addProperty(propertyName, currentToken().getData()))
+						KumaCore::Log::getLog().error("Failed to add property to character. PropertyName: ", propertyName, " Value: ", currentToken().getData());
+				}
+			}
+			else if (currentToken().isSeparator("("))
+			{
+				// Parse: <ID>(<ID>) = <ID|StrLit>
+				currentTokenIndex++;
+				if (!currentToken().isIdentifier())
+					errorExpected("Identifier after <ID>(");
+
+				std::string subIDName = currentToken().getData();
+
+				currentTokenIndex++;
+				if (!currentToken().isSeparator(")"))
+					errorExpected(")");
+
+				currentTokenIndex++;
+				if (!currentToken().isOperator("="))
+					errorExpected("=");
+				
+				currentTokenIndex++;
+				if (currentToken().isStringLiteral())
+				{
+					if (!character->addPropertySubtype(propertyName, subIDName, currentToken().getData()))
+						KumaCore::Log::getLog().error("Failed to add property to character. PropertyName: ", propertyName, " Value: ", currentToken().getData());
+				}
+				else if (currentToken().isIdentifier())
+				{
+					if (!character->addPropertySubtype(propertyName, subIDName, currentToken().getData()))
+						KumaCore::Log::getLog().error("Failed to add property to character. PropertyName: ", propertyName, " Value: ", currentToken().getData());
+				}
 			}
 
 			currentTokenIndex++;
@@ -60,18 +96,18 @@ bool Parser::parseCharacter()
 	return true;
 }
 
-std::unique_ptr<KumaCore::Scene> Parser::parseScene()
+bool Parser::parseScene()
 {
 	if (tokens.size() < 4)
 	{
 		KumaCore::Log::getLog().error("Failed to parse scene, not enough tokens");
-		return nullptr;
+		return false;
 	}
 
 	if (!areNextTokensTheStartOfAScene())
 	{
 		KumaCore::Log::getLog().error("Failed to parse scene");
-		return nullptr;
+		return false;
 	}
 
 	// Now we will use a while loop until we reach the final } marking the end of the scene
@@ -90,7 +126,7 @@ std::unique_ptr<KumaCore::Scene> Parser::parseScene()
 			curlyDepth--;
 		else if (currentToken().isIdentifier())
 		{
-			//This eventually needs to do a lookup to a character DB
+			//Lookup the character to make sure they are defined
 			std::string identifierName = tokens[currentTokenIndex].getData();
 			std::string characterName = "";
 			auto character = parserDatabase.lookupCharacter(identifierName);
@@ -120,22 +156,47 @@ std::unique_ptr<KumaCore::Scene> Parser::parseScene()
 						errorExpected("(");
 
 					currentTokenIndex++;
-					scene->addAction(KumaCore::DialogSceneAction(characterName, tokens[currentTokenIndex].getData()));
+					std::string dialogText = tokens[currentTokenIndex].getData();
+					std::string dialogEmotion = "";
 
 					currentTokenIndex++;
-					if (!currentToken().isSeparator(")"))
+					//This token can either be a comma or a )
+					if (currentToken().isSeparator(","))
+					{
+						currentTokenIndex++;
+
+						//Read emotion ID
+						if (currentToken().isIdentifier())
+							dialogEmotion = currentToken().getData();
+
+						currentTokenIndex++;
+					}
+
+					if (currentToken().isSeparator(")"))
+					{
+						currentTokenIndex++;
+						if (!currentToken().isSeparator(";"))
+							errorExpected(";");
+					}
+					else
+					{
 						errorExpected(")");
+					}
 
-					currentTokenIndex++;
-					if (!currentToken().isSeparator(";"))
-						errorExpected(";");
+					scene->addAction(KumaCore::DialogSceneAction(character, dialogText, dialogEmotion));
 				}
 			}
 		}
 		currentTokenIndex++;
 	} while (curlyDepth != 0);
 
-	return scene;
+	parserDatabase.addScene(scene);
+	return true;
+}
+
+void KumaCompiler::Parser::errorExpected(const std::string& expected)
+{
+	KumaCore::Log::getLog().error("Expected ", expected, " after ", currentToken().tokenTypeToString(), " on line ", currentToken().getLine());
 }
 
 bool KumaCompiler::Parser::areNextTokensTheStartOfAScene() const

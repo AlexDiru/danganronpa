@@ -16,7 +16,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
+    <ClCompile Include="GLCharacter.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSprite.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -24,10 +27,10 @@
     <ClInclude Include="Sprite.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
+    <ClInclude Include="CharacterSprite.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterSprite.h">
+    <ClInclude Include="GLCharacter.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

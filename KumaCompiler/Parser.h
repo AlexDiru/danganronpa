@@ -19,19 +19,31 @@ namespace KumaCompiler
 	public:
 		Parser(const std::vector<Token>& tokens) : tokens(std::move(tokens)) {}
 
-		bool areNextTokensTheStartOfAScene() const;
-		bool areNextTokensTheStartOfACharacter() const;
+		ParserDatabase& getDatabase() { return parserDatabase;  }
 
-		std::unique_ptr<KumaCore::Scene> parseScene();
-		bool parseCharacter();
+		void parse() 
+		{
+			while (tokensLeftToParse())
+			{
+				if (areNextTokensTheStartOfACharacter())
+					parseCharacter();
+				else if (areNextTokensTheStartOfAScene())
+					parseScene();
+			}
+		}
 	private:
 		KumaCompiler::ParserDatabase parserDatabase;
 		inline const Token& currentToken() const { return tokens[currentTokenIndex]; }
 		const std::vector<Token>& tokens;
 		size_t currentTokenIndex{ 0 };
-		inline void errorExpected(const std::string& expected)
-		{
-			KumaCore::Log::getLog().error("Expected ", expected, " after ", currentToken().tokenTypeToString(), " on line ", currentToken().getLine());
-		}
+
+		inline void errorExpected(const std::string& expected);
+
+		bool areNextTokensTheStartOfAScene() const;
+		bool areNextTokensTheStartOfACharacter() const;
+		bool tokensLeftToParse() const { return currentTokenIndex < tokens.size(); }
+
+		bool parseScene();
+		bool parseCharacter();
 	};
 }

@@ -4,14 +4,23 @@
 
 using namespace KumaCore;
 
-KumaCore::DialogSceneAction::DialogSceneAction(const std::string& name, const std::string& text) : name(name), text(text)
+KumaCore::DialogSceneAction::DialogSceneAction(const Character* character, const std::string& text) : DialogSceneAction(character, text, "")
+{
+	
+}
+
+KumaCore::DialogSceneAction::DialogSceneAction(const Character* character, const std::string& text, const std::string& defaultEmotion) : character(character), text(text), defaultEmotion(defaultEmotion)
 {
 
 }
 
-void KumaCore::DialogSceneAction::show() const
+void KumaCore::DialogSceneAction::show()
 {
-	std::cout << name << ": " << text << std::endl;
+	if (defaultEmotion == "")
+		std::cout << character->getDisplayName() << ": " << text << " [emotion_img: " << character->getDefaultSpriteFilename() << "]" << std::endl;
+	else
+		std::cout << character->getDisplayName() << ": " << text << " [emotion_img: " << character->getSpriteMap().at(defaultEmotion) << "]" << std::endl;
+
 }
 
 void Scene::show()

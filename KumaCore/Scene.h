@@ -4,24 +4,28 @@
 #include <string>
 #include <memory>
 
+#include "Character.h"
+
 namespace KumaCore
 {
 	class AbstractSceneAction
 	{
 	public:
-		virtual void show() const = 0;
+		virtual void show() = 0;
 	};
 
 	class DialogSceneAction : public AbstractSceneAction 
 	{
 	public:
-		DialogSceneAction(const std::string& name, const std::string& text);
+		DialogSceneAction(const Character* character, const std::string& text);
+		DialogSceneAction(const Character* character, const std::string& text, const std::string& defaultEmotion);
 
-		void show() const override;
+		void show() override;
 
 	private:
-		std::string name;
+		const Character* character;
 		std::string text;
+		std::string defaultEmotion;
 	};
 
 	class Scene
@@ -41,6 +45,8 @@ namespace KumaCore
 		{
 			return currentAction < sceneActions.size();
 		}
+
+		std::string getIdentifierName() const { return name; }
 
 	private:
 		std::string name;
