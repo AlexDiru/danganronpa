@@ -16,6 +16,7 @@ namespace KumaGame
 		KumaCore::Character character;
 	public:
 		GLCharacter(KumaCore::Character& character);
+
 		~GLCharacter() {}
 	};
 }

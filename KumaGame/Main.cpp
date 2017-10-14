@@ -15,6 +15,8 @@
 #include <SDL.h>
 #undef main
 
+#include <SDL_image.h>
+
 #include "FileIO.h"
 
 std::string programName = "Headerphile SDL2 - OpenGL thing";
@@ -112,6 +114,21 @@ void RunGame()
 {
 	bool loop = true;
 
+	//Create renderer for window
+	auto gRenderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
+	if (gRenderer == NULL)
+	{
+		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+		return;
+	}
+
+	SDL_Surface* image = IMG_Load("../content/KokichiOma/Kokichi_angry.png");
+
+	if (image == nullptr)
+		std::cout << "Failed to load image" << std::endl;
+	
+	auto texture = SDL_CreateTextureFromSurface(gRenderer, image);
+
 	while (loop)
 	{
 		SDL_Event event;
@@ -146,6 +163,10 @@ void RunGame()
 					SDL_GL_SwapWindow(mainWindow);
 					break;
 				default:
+					//Render texture to screen
+					SDL_RenderCopy(gRenderer, texture, NULL, NULL);
+					//Update screen
+					SDL_RenderPresent(gRenderer);
 					break;
 				}
 			}

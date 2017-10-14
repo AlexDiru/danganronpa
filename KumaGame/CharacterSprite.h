@@ -10,6 +10,6 @@ namespace KumaGame
 	{
 	public:
 		CharacterSprite(const std::string& filename);
-
+		
 	};
 }
