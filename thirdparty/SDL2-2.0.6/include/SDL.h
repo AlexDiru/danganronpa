@@ -131,3 +131,4 @@ extern DECLSPEC void SDLCALL SDL_Quit(void);
 #endif /* SDL_h_ */
 
 /* vi: set ts=4 sw=4 expandtab: */
+#undef main

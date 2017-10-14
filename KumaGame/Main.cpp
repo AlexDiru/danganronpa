@@ -11,13 +11,15 @@
 #define GL3_PROTOTYPES 1
 #include <GL/glew.h>
 
-// SDL2 Headers
-#include <SDL.h>
-#undef main
+// SDL2 Headersf
 
 #include <SDL_image.h>
 
 #include "FileIO.h"
+#include "SDLMaster.h"
+#include "Image.h"
+
+using namespace KumaGame;
 
 std::string programName = "Headerphile SDL2 - OpenGL thing";
 
@@ -115,19 +117,15 @@ void RunGame()
 	bool loop = true;
 
 	//Create renderer for window
-	auto gRenderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
-	if (gRenderer == NULL)
+	KumaGame::SDLMaster::get().renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
+	if (KumaGame::SDLMaster::get().renderer == nullptr)
 	{
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 		return;
 	}
 
-	SDL_Surface* image = IMG_Load("../content/KokichiOma/Kokichi_angry.png");
-
-	if (image == nullptr)
-		std::cout << "Failed to load image" << std::endl;
-	
-	auto texture = SDL_CreateTextureFromSurface(gRenderer, image);
+	Image image("../content/KokichiOma/Kokichi_angry.png");
+	image.load();
 
 	while (loop)
 	{
@@ -164,9 +162,10 @@ void RunGame()
 					break;
 				default:
 					//Render texture to screen
-					SDL_RenderCopy(gRenderer, texture, NULL, NULL);
+					image.render();
+
 					//Update screen
-					SDL_RenderPresent(gRenderer);
+					SDL_RenderPresent(KumaGame::SDLMaster::get().renderer);
 					break;
 				}
 			}

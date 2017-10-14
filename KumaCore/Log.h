@@ -46,3 +46,10 @@ namespace KumaCore
 		}
 	};
 }
+
+// Log macros to reduce verbosity
+template<typename... Args>
+void LOG_ERROR(Args... args)
+{
+	KumaCore::Log().error(std::forward<Args>(args)...);
+}

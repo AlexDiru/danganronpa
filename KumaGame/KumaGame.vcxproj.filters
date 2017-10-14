@@ -22,16 +22,25 @@
     <ClCompile Include="CharacterSprite.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLMaster.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sprite.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterSprite.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="GLCharacter.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLMaster.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

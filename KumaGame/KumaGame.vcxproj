@@ -142,11 +142,14 @@
     <ClCompile Include="CharacterSprite.cpp" />
     <ClCompile Include="GLCharacter.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="SDLMaster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLCharacter.h" />
     <ClInclude Include="CharacterSprite.h" />
-    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SDLMaster.h" />
+    <ClInclude Include="Image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,15 +1,17 @@
 #pragma once
 
-#include "Sprite.h"
+#include "Image.h"
 
 #include <string>
 
+#include <SDL.h>
+
 namespace KumaGame
 {
-	class CharacterSprite : public Sprite 
+	class CharacterSprite : public Image 
 	{
 	public:
 		CharacterSprite(const std::string& filename);
-		
+
 	};
 }

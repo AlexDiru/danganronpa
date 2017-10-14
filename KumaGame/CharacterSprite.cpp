@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-KumaGame::CharacterSprite::CharacterSprite(const std::string& filename)
+KumaGame::CharacterSprite::CharacterSprite(const std::string& filename) : Image(filename)
 {
-	std::cout << "Loading character sprite from " << filename << std::endl;
+
 }
