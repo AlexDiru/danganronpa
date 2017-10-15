@@ -11,6 +11,9 @@
     <Filter Include="Game">
       <UniqueIdentifier>{fa6f5241-ac21-4b3b-8b0f-19eb66b810ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CompilerInteraction">
+      <UniqueIdentifier>{5c7e627c-8b8d-4845-9a32-0af6848297d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -28,6 +31,9 @@
     <ClCompile Include="SDLMaster.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterSprite.h">
@@ -40,6 +46,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>

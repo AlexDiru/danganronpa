@@ -81,13 +81,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -95,13 +95,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,14 +111,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,18 +129,20 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\KumaCompiler;$(SolutionDir)\KumaCore;$(SolutionDir)\thirdparty\glew-2.1.0\include;$(SolutionDir)\thirdparty\SDL2-2.0.6\include;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\include;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\thirdparty\SDL2-2.0.6\lib\x64;$(SolutionDir)\thirdparty\glew-2.1.0\lib\Release\x64;$(SolutionDir)\thirdparty\SDL2_image-2.0.1\lib\x64;$(SolutionDir)\thirdparty\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;glew32.lib;opengl32.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CharacterSprite.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="GLCharacter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -150,6 +153,7 @@
     <ClInclude Include="CharacterSprite.h" />
     <ClInclude Include="SDLMaster.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Font.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
