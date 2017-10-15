@@ -1,9 +1,6 @@
-// Headerphile.com OpenGL Tutorial part 1
-// A Hello World in the world of OpenGL ( creating a simple windonw and setting background color )
-// Source code is an C++ adaption / simplicication of : https://www.opengl.org/wiki/Tutorial1:_Creating_a_Cross_Platform_OpenGL_3.2_Context_in_SDL_(C_/_SDL)
-// Compile : clang++ main.cpp -lGL -lSDL2 -std=c++11 -o Test
+#pragma comment( linker, "/subsystem:windows" )
+//#pragma comment( linker, "/subsystem:console" )
 
-// C++ Headers
 #include <string>
 #include <iostream>
 
@@ -20,9 +17,14 @@
 #include <SDL_ttf.h>
 
 #include "FileIO.h"
+
 #include "SDLMaster.h"
 #include "Image.h"
 #include "Font.h"
+#include "GLCharacter.h"
+
+#include "Lexer.h"
+#include "Parser.h"
 
 using namespace KumaGame;
 
@@ -31,8 +33,42 @@ void PrintSDL_GL_Attributes();
 void CheckSDLError(int line);
 void RunGame();
 
-int WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+int sdlMain()
 {
+	//Run the compiler before setting SDL up 
+	std::string source = KumaCore::FileIO::loadFile(KumaCore::FileIO::getScripts("test.txt"));
+
+	KumaCompiler::Lexer lexer{};
+	KumaCompiler::LexerFlags flags{};
+	flags.ignoreWhitespaceTokens = true;
+
+	lexer.setLexerFlags(flags);
+
+	lexer.tokenise(source);
+
+	std::cout << "Source: " << std::endl;
+	std::cout << source.c_str() << std::endl;
+	std::cout << std::endl;
+
+	for (auto const &token : lexer.getTokens())
+		std::cout << token.toString() << std::endl;
+
+	std::cin.get();
+
+	KumaCompiler::Parser parser(lexer.getTokens());
+	parser.parse();
+
+	// Now let's grab a scene and display it
+	auto parsedScene = parser.getDatabase().lookupScene("Outside");
+
+	if (parsedScene != nullptr)
+		while (parsedScene->hasActionsLeft())
+		{
+			parsedScene->show();
+			std::cin.get();
+		}
+
+
 	if (!initialise())
 		return -1;
 
@@ -40,7 +76,68 @@ int WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LP
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
 
-	RunGame();
+	// Initialised GL stuff from compiled stuff
+	std::vector<GLCharacter> characters;
+	auto charactersToLoad = parsedScene->getCharactersInvolvedInScene();
+	for (const KumaCore::Character* characterToLoad : charactersToLoad)
+		characters.push_back(GLCharacter(*characterToLoad));
+
+	// RUN GAME BEGIN
+	bool loop = true;
+
+	Font font("../content/Fonts/Raleway/Raleway-Regular.ttf", 24);
+
+	while (loop)
+	{
+		glClearColor(1.0, 1.0, 1.0, 1.0);
+
+
+		//Render texture to screen
+		characters[rand() % characters.size()].render("");
+		font.setColour({ 0, 0,0,255 });
+		font.render("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 0, 0);
+
+		//Update screen
+		SDL_RenderPresent(KumaGame::SDLMaster::get().renderer);
+
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				loop = false;
+
+			if (event.type == SDL_KEYDOWN)
+			{
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_ESCAPE:
+					loop = false;
+					break;
+				case SDLK_r:
+					// Cover with red and update
+					glClearColor(1.0, 0.0, 0.0, 1.0);
+					glClear(GL_COLOR_BUFFER_BIT);
+					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
+					break;
+				case SDLK_g:
+					// Cover with green and update
+					glClearColor(0.0, 1.0, 0.0, 1.0);
+					glClear(GL_COLOR_BUFFER_BIT);
+					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
+					break;
+				case SDLK_b:
+					// Cover with blue and update
+					glClearColor(0.0, 0.0, 1.0, 1.0);
+					glClear(GL_COLOR_BUFFER_BIT);
+					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+	// RUN GAME END
 
 	SDL_GL_DeleteContext(SDLMaster::get().mainContext);
 	SDL_DestroyWindow(SDLMaster::get().mainWindow);
@@ -108,67 +205,6 @@ bool initialise()
 	return true;
 }
 
-void RunGame()
-{
-	bool loop = true;
-
-	Image image("../content/KokichiOma/Kokichi_angry.png");
-	image.load();
-
-	Font font("../content/Fonts/Raleway/Raleway-Regular.ttf", 24);
-
-	while (loop)
-	{
-		glClearColor(1.0, 1.0, 1.0, 1.0);
-
-
-		//Render texture to screen
-		image.render();
-		font.setColour({ 0, 0,0,255 });
-		font.render("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 0, 0);
-
-		//Update screen
-		SDL_RenderPresent(KumaGame::SDLMaster::get().renderer); 
-
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				loop = false;
-
-			if (event.type == SDL_KEYDOWN)
-			{
-				switch (event.key.keysym.sym)
-				{
-				case SDLK_ESCAPE:
-					loop = false;
-					break;
-				case SDLK_r:
-					// Cover with red and update
-					glClearColor(1.0, 0.0, 0.0, 1.0);
-					glClear(GL_COLOR_BUFFER_BIT);
-					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
-					break;
-				case SDLK_g:
-					// Cover with green and update
-					glClearColor(0.0, 1.0, 0.0, 1.0);
-					glClear(GL_COLOR_BUFFER_BIT);
-					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
-					break;
-				case SDLK_b:
-					// Cover with blue and update
-					glClearColor(0.0, 0.0, 1.0, 1.0);
-					glClear(GL_COLOR_BUFFER_BIT);
-					SDL_GL_SwapWindow(SDLMaster::get().mainWindow);
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}
-}
-
 void CheckSDLError(int line = -1)
 {
 	std::string error = SDL_GetError();
@@ -193,3 +229,6 @@ void PrintSDL_GL_Attributes()
 	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &value);
 	std::cout << "SDL_GL_CONTEXT_MINOR_VERSION: " << value << std::endl;
 }
+
+int WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd) { sdlMain(); }
+int main() { sdlMain(); }

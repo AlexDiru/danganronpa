@@ -10,6 +10,7 @@
 //TODO Support <ID>.say(<StrLit>,<ID>);
 //Where the second parameter is the ID for the sprite to use
 
+
 int main()
 {
 	std::string source = KumaCore::FileIO::loadFile(KumaCore::FileIO::getScripts("test.txt"));
@@ -35,7 +36,6 @@ int main()
 	KumaCompiler::Parser parser(lexer.getTokens());
 	parser.parse();
 	
-
 	auto parsedScene = parser.getDatabase().lookupScene("Outside");
 
 	if (parsedScene != nullptr)

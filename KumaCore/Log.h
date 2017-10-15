@@ -4,6 +4,11 @@
 #include <sstream>
 #include <iostream>
 
+#define NOMINMAX 
+#define STRICT 
+#define WIN32_LEAN_AND_MEAN 
+#include <windows.h>
+
 namespace KumaCore
 {
 	class Log
@@ -27,9 +32,9 @@ namespace KumaCore
 			std::ostringstream oss;
 			log(oss, args...);
 			if (level == 0)
-				std::cout << oss.str() << std::endl;
+				OutputDebugString((oss.str() + "\n").c_str());
 			if (level == 1)
-				std::cerr << oss.str() << std::endl;
+				OutputDebugString((oss.str() + "\n").c_str());
 		}
 
 	public:

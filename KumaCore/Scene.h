@@ -21,7 +21,7 @@ namespace KumaCore
 		DialogSceneAction(const Character* character, const std::string& text, const std::string& defaultEmotion);
 
 		void show() override;
-
+		const Character* getCharacter() const;
 	private:
 		const Character* character;
 		std::string text;
@@ -34,29 +34,22 @@ namespace KumaCore
 	public:
 		Scene(const std::string& name);
 
-		void addAction(const DialogSceneAction& sceneAction)
-		{
-			addAction(std::make_unique<DialogSceneAction>(sceneAction));
-		}
+		void addAction(const DialogSceneAction& sceneAction);
 
 		void show();
 
-		bool hasActionsLeft() const
-		{
-			return currentAction < sceneActions.size();
-		}
+		bool hasActionsLeft() const;
 
 		std::string getIdentifierName() const { return name; }
+		const std::vector<const Character*>& getCharactersInvolvedInScene() const;
 
 	private:
 		std::string name;
 		std::vector<SceneAction> sceneActions;
+		std::vector<const Character*> charactersInvolvedInScene;
 		size_t currentAction{ 0 };
 
 		//Note: sceneAction is moved
-		void addAction(SceneAction sceneAction)
-		{
-			sceneActions.push_back(std::move(sceneAction));
-		}
+		void addAction(SceneAction sceneAction);
 	};
 }

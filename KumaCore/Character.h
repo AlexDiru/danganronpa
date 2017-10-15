@@ -35,6 +35,7 @@ namespace KumaCore
 		const std::map<std::string, std::string>& getSpriteMap() const { return spriteMap; }
 		std::string getBaseFolder() const { return baseFolder; }
 		std::string getDefaultSpriteFilename() const { return spriteMap.at(defaultSprite); }
+		std::string getDefaultEmotion() const { return defaultSprite; }
 	private:
 		std::string identifierName;
 		std::string displayName{ "UndefinedDisplayName" };

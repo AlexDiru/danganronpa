@@ -11,7 +11,8 @@ namespace KumaGame
 	class CharacterSprite : public Image 
 	{
 	public:
-		CharacterSprite(const std::string& filename);
+		CharacterSprite(); //Default constructor for map to work
+		CharacterSprite(const std::string& _filename);
 
 	};
 }

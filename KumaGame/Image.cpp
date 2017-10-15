@@ -7,8 +7,9 @@
 
 using namespace KumaGame;
 
-Image::Image(const std::string& filename) : filename(filename)
+Image::Image(const std::string& _filename) : filename(_filename)
 {
+	LOG_ERROR("Image constructor filename: " + filename);
 }
 
 bool Image::isLoaded() const
@@ -18,7 +19,7 @@ bool Image::isLoaded() const
 
 bool Image::load()
 {
-	SDL_Surface* image = IMG_Load("../content/KokichiOma/Kokichi_angry.png");
+	SDL_Surface* image = IMG_Load(filename.c_str());
 
 	if (image == nullptr)
 	{
@@ -37,12 +38,12 @@ bool Image::load()
 	return true;
 }
 
-void KumaGame::Image::render()
+void KumaGame::Image::render() const
 {
 	SDL_RenderCopy(KumaGame::SDLMaster::get().renderer, texture, nullptr, nullptr);
 }
 
-void KumaGame::Image::render(const SDL_Rect& sourceRect, const SDL_Rect& destRect)
+void KumaGame::Image::render(const SDL_Rect& sourceRect, const SDL_Rect& destRect) const
 {
 	SDL_RenderCopy(KumaGame::SDLMaster::get().renderer, texture, &sourceRect, &destRect);
 }
