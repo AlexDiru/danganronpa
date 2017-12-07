@@ -26,6 +26,9 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Parser</Filter>
     </ClCompile>
+    <ClCompile Include="Lexer.cpp">
+      <Filter>Lexical Analysis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer.h">

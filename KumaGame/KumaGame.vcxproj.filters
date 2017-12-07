@@ -34,6 +34,9 @@
     <ClCompile Include="Font.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="GLScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterSprite.h">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GLScene.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
